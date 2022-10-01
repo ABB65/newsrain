@@ -26,9 +26,9 @@ const changeMode = () =>
           />
         </svg>
       </span>
-      <span class="logo-text text-3xl font-bold default-text ml-4">Newsrain</span>
+      <span class="logo-text text-3xl font-bold default-text ml-4 hidden lg:inline">Newsrain</span>
     </div>
-    <form class="w-full max-w-sm">
+    <form class="w-full max-w-sm pl-8 lg:pl-0">
       <div class="flex items-center border-b border-red-500 py-2">
         <input
           class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none bg-neutral-100
@@ -54,8 +54,28 @@ const changeMode = () =>
           Subscribe
         </button>
       </div>
+      <div class="mobile-social-links pt-4 w-full flex items-center justify-between lg:hidden">
+        <button class="mx-1 p-1" @click="changeMode()">
+          <i
+            :class="$colorMode.value !== 'light' ? 'ri-sun-fill' : 'ri-moon-fill'"
+            class="text-2xl text-red-500"
+          />
+        </button>
+        <a class="mx-1 p-1" href="http://" target="_blank" rel="noopener noreferrer"> <i
+          class="text-2xl default-text ri-github-fill"
+        /></a>
+        <a class="mx-1 p-1" href="http://" target="_blank" rel="noopener noreferrer"> <i
+          class="text-2xl default-text ri-twitter-fill"
+        /></a>
+        <a class="mx-1 p-1" href="http://" target="_blank" rel="noopener noreferrer"> <i
+          class="text-2xl default-text ri-linkedin-fill"
+        /></a>
+        <a class="mx-1 p-1" href="http://" target="_blank" rel="noopener noreferrer"> <i
+          class="text-2xl default-text ri-discord-fill"
+        /></a>
+      </div>
     </form>
-    <div class="social-links">
+    <div class="social-links hidden lg:block">
       <button class="mx-1 p-1" @click="changeMode()">
         <i
           :class="$colorMode.value !== 'light' ? 'ri-sun-fill' : 'ri-moon-fill'"

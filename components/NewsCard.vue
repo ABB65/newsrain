@@ -4,25 +4,29 @@
 const props = defineProps({
   title: { type: String, required: true },
   description: { type: String, required: true },
+  content: { type: String, required: true },
+  image: { type: String, default: 'https://images.unsplash.com/photo-1633158829875-e5316a358c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' },
   featured: { type: Boolean }
 })
 const readingTime = () => {
-  const text = props.description
+  console.log(props.content)
+  const text = props.content
   const wpm = 225
   const words = text.trim().split(/\s+/).length
   const time = Math.ceil(words / wpm)
+  console.log(words / wpm)
   return time
 }
 </script>
 <template>
-  <div class="box-content news-card w-1/4 transition-all hover:grow-[12]" :class="featured ? 'grow-[8]': 'grow'">
+  <div class="box-content news-card w-full lg:w-1/3 xl:w-1/4 transition-all hover:grow-[12]" :class="featured ? 'grow-[8]': 'grow'">
     <div class="detail pl-4 clear-left h-80 overflow-hidden">
       <h2 class="border-b border-red-400 mb-4 h-[4.875rem] text-overflow overflow-hidden">
         {{ title }}
       </h2>
       <img
         class=" float-left w-1/2 mr-4"
-        src="https://images.unsplash.com/photo-1633158829875-e5316a358c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+        :src="image"
         alt=""
         srcset=""
       >

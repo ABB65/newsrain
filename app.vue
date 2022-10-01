@@ -1,35 +1,28 @@
 <script lang="ts" setup>
-const { data: news } = await useFetch('https://baconipsum.com/api/?type=meat-and-filler')
+
+const { pending, data: news } = await useLazyFetch('https://newsapi.org/v2/everything?q=bitcoin&apiKey=f844884cc4844867b03ff2bca1d12dce')
+console.log(news.value, pending)
+watch(news, (newNews) => {
+  console.log(newNews)
+  // Because posts starts out null, you won't have access
+  // to its contents immediately, but you can watch it.
+})
 </script>
 
 <template>
   <div class="app w-full min-h-screen bg-neutral-100 dark:bg-neutral-900">
     <div class="container mx-auto px-4 py-4">
       <NewsHeader />
-      <div class="content w-full flex flex-wrap gap-8 py-16">
+      <div class="content w-full flex flex-wrap gap-16 py-16">
         <NewsCard
-          v-for="(element,i) in news"
+          v-for="(element,i) in news.articles"
           :key="i"
           :order="i"
           :featured="i%3===0"
-          :title="element.split(' ', Math.floor(Math.random() * 20) + 1).join(' ')"
-          :description="element"
-        />
-        <NewsCard
-          v-for="(element,i) in news"
-          :key="i + 'k'"
-          :order="i"
-          :featured="i%3 ===0"
-          :title="element.split(' ', Math.floor(Math.random() * 20) + 1).join(' ')"
-          :description="element"
-        />
-        <NewsCard
-          v-for="(element,i) in news"
-          :key="i + 'z'"
-          :order="i"
-          :featured="i%3 ===0"
-          :title="element.split(' ', Math.floor(Math.random() * 20) + 1).join(' ')"
-          :description="element"
+          :title="element?.title"
+          :description="element?.description"
+          :content="element?.content"
+          :image="element.urlToImage"
         />
       </div>
     </div>
